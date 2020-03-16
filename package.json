@@ -1,0 +1,26 @@
+{
+  "name": "zhixiao",
+  "version": "1.0.0",
+  "description": "将社团信息统一化",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "zhixiao-install": "npm intsall --prefix zhixiao",
+    "zhixiao-run": "npm run serve --prefix zhixiao",
+    "zhixiao": "concurrently \"npm run start\" \"npm run zhixiao-run\" "
+  },
+  "author": "CodeKiang",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "concurrently": "^5.1.0",
+    "element-ui": "^2.13.0",
+    "express": "^4.17.1",
+    "gravatar": "^1.8.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.4",
+    "mysql": "^2.18.1",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0"
+  }
+}

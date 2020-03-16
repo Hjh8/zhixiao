@@ -1,0 +1,33 @@
+const express = require("express")
+const bodyparser = require("body-parser")
+
+const app = express()
+// 如果环境变量中配置了端口就使用环境配置的端口 否则端口为9999
+const port = process.env.port || 8989;
+app.all('/*', function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Headers', 'X-Requested-With, mytoken')
+  res.header('Access-Control-Allow-Headers', 'X-Requested-With, Authorization')
+  res.setHeader('Content-Type', 'application/json;charset=utf-8')
+  res.header('Access-Control-Allow-Headers', 'Content-Type,Content-Length, Authorization, Accept,X-Requested-With')
+  res.header('Access-Control-Allow-Methods', 'PUT,POST,GET,DELETE,OPTIONS')
+  res.header('X-Powered-By', ' 3.2.1')
+  
+  if (req.method == 'OPTIONS') res.send(200)
+  else next() /*让options请求快速返回*/ 
+})
+
+// 使用body-parser中间件 （需要放在路由配置之前！）
+app.use(bodyparser.json())
+app.use(bodyparser.urlencoded({extended:false}))
+
+const users = require("./routes/api/users")
+app.use(users) // 使用路由中间件
+
+app.get('/',(req,res) => {
+  res.send('hello world')
+})
+
+app.listen(port,() =>{
+  console.log(`服务器正在开启 ${port}`)
+})
