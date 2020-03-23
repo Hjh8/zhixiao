@@ -3,7 +3,10 @@ const bodyparser = require("body-parser")
 
 const app = express()
 // 如果环境变量中配置了端口就使用环境配置的端口 否则端口为9999
-const port = process.env.port || 8989;
+// const port = process.env.port || 8989;
+const port = 8989
+
+// 解决跨域问题
 app.all('/*', function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*')
   res.header('Access-Control-Allow-Headers', 'X-Requested-With, mytoken')
@@ -23,6 +26,9 @@ app.use(bodyparser.urlencoded({extended:false}))
 
 const users = require("./routes/api/users")
 app.use(users) // 使用路由中间件
+
+const zhixiao = require("./routes/api/zhixiao")
+app.use(zhixiao)
 
 app.get('/',(req,res) => {
   res.send('hello world')
