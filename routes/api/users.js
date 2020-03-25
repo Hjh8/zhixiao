@@ -44,11 +44,10 @@ router.post("/login",(req,res) => {
       res.json({status:400})
     }
     // jwt.sign(要加密的对象,密钥,过期时间,箭头函数)
-    const data = {name:user[0].name,email:user[0].email,password:user[0].password}
-    console.log(data)
-    jwt.sign(data,'CodeKiang',{expiresIn:'0.5h'},(err,token) =>{
-      if(err) throw err
-      res.json({status:200,success:true,token:token})
+    const data = {name:user[0].name,email:user[0].email,avatar:user[0].avatar}
+    jwt.sign(data,'CodeKiang',{expiresIn:'1h'},(err,token) =>{
+      if(err) res.status(401)
+      res.json({status:200,token:token})
     })
   })
 })

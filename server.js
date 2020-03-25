@@ -3,16 +3,17 @@ const bodyparser = require("body-parser")
 
 const app = express()
 // 如果环境变量中配置了端口就使用环境配置的端口 否则端口为9999
-// const port = process.env.port || 8989;
-const port = 8989
+const port = process.env.port || 8989;
+// const port = 8989
 
 // 解决跨域问题
 app.all('/*', function(req, res, next) {
+  // 允许的跨域的域名
   res.header('Access-Control-Allow-Origin', '*')
-  res.header('Access-Control-Allow-Headers', 'X-Requested-With, mytoken')
-  res.header('Access-Control-Allow-Headers', 'X-Requested-With, Authorization')
   res.setHeader('Content-Type', 'application/json;charset=utf-8')
+  // 允许跨域请求携带的请求头
   res.header('Access-Control-Allow-Headers', 'Content-Type,Content-Length, Authorization, Accept,X-Requested-With')
+  // 允许跨域的方法
   res.header('Access-Control-Allow-Methods', 'PUT,POST,GET,DELETE,OPTIONS')
   res.header('X-Powered-By', ' 3.2.1')
   

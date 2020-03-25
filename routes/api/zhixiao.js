@@ -1,5 +1,5 @@
 const express = require("express")
-
+const jwt = require('jsonwebtoken')
 const router = express.Router();
 
 const mysql = require('mysql')
@@ -9,9 +9,7 @@ const connection = mysql.createConnection({
   password : '5642818',
   database : 'zhixiao'
 })
-router.get("/zhixiao",(req,res) => { // 路由跳转
-  res.json({msg: "我是zhixiao路由"})
-})
+
 
 router.get('/xiaoji',(req,res) => {
   const sql = 'select name from xiaoji'
@@ -38,9 +36,22 @@ router.get('/xiehui',(req,res) => {
 })
 
 router.get('/show',(req,res) => {
-  console.log(req.query)
-  if(typeof(req.query.name)!=="string"){
-    console.log(typeof(req.query.name)!==String)
+  jwt.verify(req.headers.authorization,'CodeKiang',(error,decoded)=>{
+    if (error) {
+      switch (error.name) {
+        case 'JsonWebTokenError':
+          res.status(401).send({msg: '无效的token'});
+          break;
+        case 'TokenExpiredError':
+          res.status(401).send({msg: 'token过期'});
+          break;
+      }
+    }
+  })
+
+  // 判断前端请求是否为院级发送的
+  if(typeof(req.query.sortage) == "string"){
+    //院级查询
     const yj_sql = "select detail,department,activity from "
     + req.query.table +" where name=? and sortage=?;"
     connection.query(yj_sql,[req.query.name,req.query.sortage],(err,result) => {
@@ -51,6 +62,7 @@ router.get('/show',(req,res) => {
     })
   }
   else{
+    // 校级，协会查询
     const sql =  "select detail,department,activity from "
     + req.query.table +" where name=?;"
     connection.query(sql,[req.query.name],(err,result) => {
