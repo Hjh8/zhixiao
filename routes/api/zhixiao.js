@@ -10,7 +10,6 @@ const connection = mysql.createConnection({
   database : 'zhixiao'
 })
 
-
 router.get('/xiaoji',(req,res) => {
   const sql = 'select name from xiaoji'
   connection.query(sql,(err,result) => {
