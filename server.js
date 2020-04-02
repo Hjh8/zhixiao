@@ -1,16 +1,19 @@
 const express = require("express")
 const bodyparser = require("body-parser")
 const compression = require('compression')
+
 const path = require('path')
 const app = express()
-// 如果环境变量中配置了端口就使用环境配置的端口 否则端口为9999
-const port = process.env.port || 8989;
-// const port = 8989
+
+// 如果环境变量中配置了端口就使用环境配置的端口 否则端口为8989
+// const port = process.env.port || 8989;
+const port = 8989
 
 // 一定要把注册compression放在托管静态资源之前
 app.use(compression())
+// 配置静态文件的地址，可以直接通过url拿到资源
 app.use(express.static(path.join(__dirname,'./dist')))
-
+app.use(express.static(path.join(__dirname,'./static')))
 
 // 解决跨域问题
 app.all('/*', function(req, res, next) {

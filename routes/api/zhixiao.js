@@ -6,7 +6,7 @@ const mysql = require('mysql')
 const connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
-  password : 'Hjh5642818$$$',
+  password : '5642818',
   database : 'zhixiao'
 })
 
@@ -73,4 +73,14 @@ router.get('/show',(req,res) => {
   }
 })
 
+router.get('/question',(req,res)=>{
+  const sql='select question from question;'
+  connection.query(sql,[],(err,result)=>{
+    if(err) {
+      throw err
+    }
+    res.json({result})
+  })
+
+})
 module.exports = router;
