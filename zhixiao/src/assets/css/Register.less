@@ -1,0 +1,62 @@
+.login_title{
+  width: 60%;
+  font-size: 30px;
+  font-weight: bold;
+  color: aliceblue;
+  position: absolute;
+  left:20%;
+  top:5%;
+}
+.r_container{
+  background: url('~assets/picture/bg0.jpg') no-repeat;
+  height: 100%;
+  background-size: cover;
+  width: 100%;
+  overflow-y: auto;
+  ::-webkit-scrollbar {
+  width: 1px;
+  height: 5px;
+  };
+  ::-webkit-scrollbar-thumb:vertical {
+  height: 1px;
+  background-color: rgba(125, 125, 125, 0.7);
+  };
+  overflow-x: auto;
+  ::-webkit-scrollbar {
+  width: 1px;
+  height: 5px;
+  };
+  ::-webkit-scrollbar-thumb:horizontal {
+  height: 1px;
+  background-color: rgba(125, 125, 125, 0.7);
+  };
+}
+.r_box{
+  width: 450px;
+  height: 600px;
+  background-color: rgba(240, 248, 255, 0.678);
+  border-radius: 3px; // 边框圆角
+  position: absolute;
+  left: 50%;
+  top: 53%;
+  padding: 0px;
+  // 移动向左向上自身的50%
+  transform: translate(-50%,-50%);
+  .btns{
+    display: flex;
+    justify-content: flex-end;
+    margin: 20px;
+  }
+  .r_form{
+    position: absolute;
+    bottom:5px;
+    margin: 5px;
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+  .el-form-item,el-input,el-form-item__content{
+    padding: 0 20px;
+    margin: 2px;
+  }
+}
