@@ -75,12 +75,10 @@ router.get('/show',(req,res) => {
 
 router.get('/question',(req,res)=>{
   const sql='select question from question;'
-  connection.query(sql,[],(err,result)=>{
-    if(err) {
-      throw err
-    }
+  connection.query(sql,(err,result)=>{
+    if(err) throw err
     res.json({result})
   })
-
 })
+
 module.exports = router;

@@ -5,7 +5,6 @@ const formidable = require('formidable'); //上传功能的插件
 const path = require('path')
 const fs = require("fs");
 
-
 const router = express.Router();
 
 const mysql = require('mysql')
@@ -22,7 +21,7 @@ const connection = mysql.createConnection({
 
 router.post("/register",(req,res)=>{
   const sql = 'select * from users where phone = ?'
-  connection.query(sql,[req.body.phone,req.body.password],(err,user)=>{
+  connection.query(sql,[req.body.phone],(err,user)=>{
     if(err) throw err
     if(user.length === 1){
       // 判断邮箱是否被注册，是则返回400状态码
@@ -32,6 +31,7 @@ router.post("/register",(req,res)=>{
       //一个邮箱对应一个头像 s:size  r:rating  d:default没有这张图片是返回的内容
       // const avatar = gravatar.url(req.body.email,{s:'200',r:'pg',d:'wavatar'})
       
+      // 初始化用户头像
       const avatar = 'http://47.115.46.57:8989/upload/init.jpg'
       const addSql = 'INSERT INTO users(name,phone,sex,birthday,email,password,avatar) VALUES(?,?,?,?,?,?,?)';
       const addSqlParams = [
@@ -50,6 +50,7 @@ router.post("/login",(req,res) => {
   const  Sql = 'select * from users where phone = ? and password = ?';
   connection.query(Sql,[req.body.phone,req.body.password],(err,user) => {
     if(user.length == 0){
+      //无此账号
       return res.json({status:400})
     }
     if(err) throw err
@@ -73,15 +74,16 @@ router.post("/login",(req,res) => {
 router.post('/upload_avatar',(req,res)=>{
   //上传文件只能通过这个插件接收  file是上传文件 fields是其他的
   let form = new formidable.IncomingForm();
-  //文件保存的临时目录为static文件夹（文件夹不存在会报错，一会接受的file中的path就是这个）
+  //文件保存的目录为static文件夹（文件夹不存在会报错，一会接受的file中的path就是这个）
   form.uploadDir = path.join(__dirname, '../../static/upload');
   form.keepExtensions = true; //使用文件的原扩展名  
-  form.parse(req, function (err, fields, file) {
+  form.parse(req,(err, fields, file) => { //转换请求中所包含的表单数据，callback会包含所有字段域和文件信息
+    // 上传文件的路径
     let filePath = '';
-    //如果提交文件的form中将上传文件的input名设置为tmpFile，就从tmpFile中取上传文件。否则取for in循环第一个上传的文件。  
+    //如果提交文件的form中将上传文件的input名设置为tmpFile，就从tmpFile中取上传文件  
     if (file.tmpFile) {
       filePath = file.tmpFile.path;
-    } else {
+    } else { // 否则取循环第一个上传的文件。
       for (var key in file) {
         if (file[key].path && filePath === '') {
           filePath = file[key].path;
@@ -119,6 +121,7 @@ router.post('/upload_avatar',(req,res)=>{
         connection.query(sql,[fileUrl,fields.phone],(err) => {
           if(err) throw err
         })
+        //返回最新的文件路径
         res.json({code: 0,fileUrl});
       }
     })

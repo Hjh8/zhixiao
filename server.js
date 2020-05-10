@@ -1,3 +1,5 @@
+
+
 const express = require("express")
 const bodyparser = require("body-parser")
 const compression = require('compression')
@@ -12,6 +14,7 @@ const port = 8989
 // 一定要把注册compression放在托管静态资源之前
 app.use(compression())
 // 配置静态文件的地址，可以直接通过url拿到资源
+// __dirname为绝对路径。根据当前运行该指令所在的文件路径去寻找
 app.use(express.static(path.join(__dirname,'./dist')))
 app.use(express.static(path.join(__dirname,'./static')))
 
