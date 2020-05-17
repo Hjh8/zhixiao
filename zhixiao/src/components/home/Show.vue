@@ -28,8 +28,11 @@
           <el-timeline-item size="large" 
           :hide-timestamp="true" v-for="(dp_value,dp_key,dp_index) in departmentList" :key="dp_key">
             <el-link :href="dp_value" target="blank"
-            :underline="false" :icon="iconList[dp_index%9]" class="department-link">
-            <h4>{{dp_key}}</h4>
+            :underline="false" class="department-link btn twitter">
+              <h3 class="fa fa-twitter">
+                <i :class="iconList[dp_index%9]"></i>
+                {{dp_key}}
+              </h3>
             </el-link>
           </el-timeline-item>
         </el-timeline>
@@ -120,5 +123,57 @@ export default {
 </script>
 
 <style lang='less' scoped>
+.btn,
+.btn:before,
+.btn .fa {
+  transition: all 0.35s;
+  transition-timing-function: cubic-bezier(0.31, -0.105, 0.43, 1.59);
+}
+.btn:before {
+  top: 90%;
+  left: -110%;
+}
+.btn .fa {
+  -webkit-transform: scale(0.9);
+  transform: scale(0.9);
+}
 
+.btn.twitter:before {
+  background-color: #00aff0;
+}
+
+.btn:focus:before,
+.btn:hover:before {
+  top: -20%;
+  left: -15%;
+}
+.btn:focus .fa,
+.btn:hover .fa {
+  color: #fff;
+  -webkit-transform: scale(1.2);
+  transform: scale(1.2);
+}
+.btn {
+  display: inline-block;
+  background-color: #fff;
+  text-align: center;
+  width: 180px;
+  height: 50px;
+  background-color: rgba(178, 240, 178, 0.692);
+  border-radius: 5%;
+  margin: 0 10px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 5px 15px -5px rgba(0, 0, 0, 0.1);
+  opacity: 0.99;
+}
+.btn:before {
+  content: "";
+  width: 120%;
+  height: 120%;
+  position: absolute;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
 </style>
