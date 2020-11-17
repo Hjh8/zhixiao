@@ -2,8 +2,8 @@
   <el-container class="home-container" v-if="isRouterAlive">
     <el-header>
       <div>
-      <span class="s1" @click="goHome('/welcome')">知 校</span>
-      <span class="sub"><sub>---- 让 你 从 另 一 个 Dimension 了 解 华 广</sub></span>
+        <span class="s1" @click="goHome('/welcome')">知 校</span>
+        <span class="sub"><sub>---- 让 你 从 另 一 个 Dimension 了 解 华 广</sub></span>
       </div>
       <div>
         <img :src="this.user.avatar" v-viewer class="ava_img">

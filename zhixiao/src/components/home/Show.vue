@@ -113,6 +113,7 @@ export default {
         if(this.detailList){
           this.logopath = require('../../'+this.detailList.logo)
           this.gzhpath = require('../../'+this.detailList.公众号)
+          console.log('../../'+this.detailList.公众号);
           this.departmentList = JSON.parse(resdata.result[0].department)
           this.activityList = JSON.parse(resdata.result[0].activity)
         }
