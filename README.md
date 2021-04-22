@@ -14,8 +14,22 @@
  node | 12.16.0 
  MySQL| 8.17 
  vue  |	4.2.2  
-  	
+
  
+
+# 启动方式
+
+1. 在第一个zhixiao根目录下输入`npm run start` 启动后端服务器
+
+   ![image-20210421194438564](README.assets/image-20210421194438564.png)
+
+2. 新建一个控制台，输入命令`cd zhixiao` 进入下一个目录
+
+   ![image-20210421194529036](README.assets/image-20210421194529036.png)
+
+3. 在此目录下输入命令`npm run serve` 启动前端项目
+
+4. 等下前端服务器启动即可
 
 
 
@@ -66,7 +80,7 @@
 5）展示地图。可放大、拖动等操作
 
 ![image](https://github.com/Hjh8/zhixiao/blob/master/README.assets/image-20210306202257216.png)
- 
+
 
 
 
