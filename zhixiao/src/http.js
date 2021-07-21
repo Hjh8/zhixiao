@@ -14,7 +14,8 @@ function startloading() {
 }
 
 // axios.defaults.baseURL = 'http://47.115.46.57:8989/api/'
-axios.defaults.baseURL = 'http://localhost:8989/api/'
+axios.defaults.baseURL = 'http://150.158.188.71:8989/api/'
+// axios.defaults.baseURL = 'http://localhost:8989/api/'
 
 //设置请求结束加载动画
 function endloading() {
